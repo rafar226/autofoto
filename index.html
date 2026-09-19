@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador de photocards</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero"><div><p class="eyebrow">IMPRESIÓN A TAMAÑO REAL</p><h1>Generador de photocards</h1><p>Armá hojas A4 listas para imprimir y recortar, directamente desde tu navegador.</p></div></header>
+  <main>
+    <section class="card" aria-labelledby="imagenes-title">
+      <div class="section-heading"><div><p class="eyebrow">01</p><h2 id="imagenes-title">Imágenes</h2></div><span id="image-count" class="pill">0 imágenes</span></div>
+      <label id="drop-zone" class="drop-zone" for="file-input"><input id="file-input" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden><strong>Arrastrá imágenes aquí</strong><span>o hacé clic para elegir JPG, PNG o WebP</span></label>
+      <p id="upload-error" class="notice error" hidden></p><div id="gallery" class="gallery" aria-live="polite"></div>
+    </section>
+    <section class="card settings" aria-labelledby="config-title">
+      <div class="section-heading"><div><p class="eyebrow">02</p><h2 id="config-title">Configuración</h2></div></div>
+      <div class="fields">
+        <label>Orientación<select id="orientation"><option value="portrait">Vertical · 210 × 297 mm</option><option value="landscape">Horizontal · 297 × 210 mm</option></select></label>
+        <label>Margen (mm)<input id="margin" type="number" min="0" step="0.5" value="5"></label>
+        <label>Separación (mm)<input id="gap" type="number" min="0" step="0.5" value="2"></label>
+        <label>Ajuste de imagen<select id="fit"><option value="cover">Cubrir y recortar</option><option value="contain">Mantener relación de aspecto (sin deformar)</option></select></label>
+      </div>
+      <fieldset><legend>Tamaño de las figuras</legend><div class="mode-picker"><label><input type="radio" name="mode" value="uniform" checked> Uniforme</label><label><input type="radio" name="mode" value="variable"> Variable</label></div>
+        <div id="uniform-fields" class="fields"><label>Ancho (mm)<input id="card-width" type="number" min="1" step="0.5" value="55"></label><label>Alto (mm)<input id="card-height" type="number" min="1" step="0.5" value="85"></label></div>
+        <div id="variable-fields" class="fields" hidden><label>Ancho mín. (mm)<input id="min-width" type="number" min="1" step="0.5" value="40"></label><label>Ancho máx. (mm)<input id="max-width" type="number" min="1" step="0.5" value="65"></label><label>Alto mín. (mm)<input id="min-height" type="number" min="1" step="0.5" value="60"></label><label>Alto máx. (mm)<input id="max-height" type="number" min="1" step="0.5" value="95"></label></div>
+      </fieldset>
+      <label class="checkbox"><input id="cut-lines" type="checkbox"> Mostrar líneas de corte</label>
+    </section>
+    <section class="summary" aria-live="polite"><div><small>FIGURAS</small><strong id="total-cards">0</strong></div><div><small id="capacity-label">CAPACIDAD POR HOJA</small><strong id="capacity">—</strong></div><div><small>HOJAS NECESARIAS</small><strong id="page-count">0</strong></div><p id="validation" class="notice"></p></section>
+    <section class="preview-section"><div class="section-heading"><div><p class="eyebrow">03</p><h2>Vista previa</h2></div><div class="actions"><button id="download" class="primary" disabled>Descargar PDF</button><button id="print" disabled>Imprimir</button></div></div><p class="print-note">Imprimir en A4, escala 100 % / tamaño real; desactivar “Ajustar a página”. Comprobá los márgenes admitidos por tu impresora.</p><div id="preview" class="preview"></div></section>
+  </main>
+  <template id="image-template"><article class="image-item"><img><div class="image-meta"><strong class="image-name"></strong><span class="resolution"></span><span class="variable-size" hidden><label>Ancho <input class="item-width" type="number" min="1" step="0.5"> mm</label><label>Alto <input class="item-height" type="number" min="1" step="0.5"> mm</label></span></div><label class="copies-label">Copias <input class="copies" type="number" min="1" value="1"></label><div class="item-actions"><button class="move-up" title="Mover arriba">↑</button><button class="move-down" title="Mover abajo">↓</button><button class="remove" title="Eliminar">×</button></div></article></template>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script><script src="app.js"></script>
+</body>
+</html>
